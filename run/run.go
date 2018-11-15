@@ -78,13 +78,15 @@ func main() {
 
 fmt.Println(list)
 
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	
 	var logStr string
 	// 生成total行日志内容，使用上面的集合
 	for i:=0; i<=*total ; i++  {
 
-		current := list[randInt(0, len(list)-1)]
-		refer := list[randInt(0, len(list)-1)]
-		ua := uaList[randInt(0, len(uaList)-1)]
+		current := list[r.Intn(len(list)-1)]
+		refer := list[r.Intn(len(list)-1)]
+		ua := uaList[r.Intn(len(uaList)-1)]
 		logStr += MakeLog(current, refer, ua) + "\n"
 		fmt.Println(logStr)
 	}
@@ -99,14 +101,14 @@ fmt.Println(list)
 
 }
 
-//随机数
-func randInt(min int, max int) int {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	if min > max {
-		return max
-	}
-	return r.Intn(max-min) + min
-}
+// //随机数
+// func randInt(min int, max int) int {
+// 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+// 	if min > max {
+// 		return max
+// 	}
+// 	return r.Intn(max-min) + min
+// }
 
 //创建日志
 func MakeLog(current, refer, ua string) (str string) {
